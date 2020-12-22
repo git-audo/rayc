@@ -1,0 +1,1 @@
+/bin/c++  -Wall -Werror -std=c++14 -lSDL2 -g CMakeFiles/rayc.dir/src/Main.cpp.o -o rayc 
