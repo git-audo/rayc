@@ -142,32 +142,59 @@ rayc/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/build
 .PHONY : rayc/fast
 
-src/Main.o: src/Main.cpp.o
+src/Rayc.o: src/Rayc.cpp.o
 
-.PHONY : src/Main.o
+.PHONY : src/Rayc.o
 
 # target to build an object file
-src/Main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Main.cpp.o
-.PHONY : src/Main.cpp.o
+src/Rayc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.o
+.PHONY : src/Rayc.cpp.o
 
-src/Main.i: src/Main.cpp.i
+src/Rayc.i: src/Rayc.cpp.i
 
-.PHONY : src/Main.i
+.PHONY : src/Rayc.i
 
 # target to preprocess a source file
-src/Main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Main.cpp.i
-.PHONY : src/Main.cpp.i
+src/Rayc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.i
+.PHONY : src/Rayc.cpp.i
 
-src/Main.s: src/Main.cpp.s
+src/Rayc.s: src/Rayc.cpp.s
 
-.PHONY : src/Main.s
+.PHONY : src/Rayc.s
 
 # target to generate assembly for a file
-src/Main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Main.cpp.s
-.PHONY : src/Main.cpp.s
+src/Rayc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.s
+.PHONY : src/Rayc.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -178,9 +205,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... rayc"
-	@echo "... src/Main.o"
-	@echo "... src/Main.i"
-	@echo "... src/Main.s"
+	@echo "... src/Rayc.o"
+	@echo "... src/Rayc.i"
+	@echo "... src/Rayc.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

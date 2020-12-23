@@ -1,4 +1,4 @@
- cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.5)
 
 project (rayc)
 
@@ -7,5 +7,5 @@ set (source_dir "${PROJECT_SOURCE_DIR}/src/")
 
 file (GLOB source_files "${source_dir}/*.cpp")
 
-add_executable (rayc src/Main.cpp)
+add_executable (rayc src/main.cpp src/Rayc.cpp)
     

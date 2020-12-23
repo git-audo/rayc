@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/rayc.dir/src/Main.cpp.o"
+  "CMakeFiles/rayc.dir/src/Rayc.cpp.o"
+  "CMakeFiles/rayc.dir/src/main.cpp.o"
   "rayc"
   "rayc.pdb"
 )

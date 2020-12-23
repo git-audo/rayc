@@ -6,9 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/gabriele/projects/cpp/rayc/src/Main.cpp
+/home/gabriele/projects/cpp/rayc/src/Rayc.cpp
 iostream
 -
+Rayc.h
+/home/gabriele/projects/cpp/rayc/src/Rayc.h
+
+/home/gabriele/projects/cpp/rayc/src/Rayc.h
 SDL2/SDL.h
 -
 
