@@ -19,6 +19,9 @@ private:
     bool isRunning;
     SDL_Window *window;
     SDL_Renderer *renderer;
+
+    int window_width, window_height;
+    int x, y;
 };
 
 #endif

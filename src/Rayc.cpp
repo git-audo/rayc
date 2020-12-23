@@ -6,6 +6,12 @@ Rayc::Rayc()
     isRunning = true;
     window = NULL;
     renderer = NULL;
+
+    window_width = 800;
+    window_height = 500;
+    
+    x = 100;
+    y = 100;
 }
 
 bool Rayc::OnInit()
@@ -18,7 +24,7 @@ bool Rayc::OnInit()
     window = SDL_CreateWindow("Application",
                               SDL_WINDOWPOS_CENTERED,
                               SDL_WINDOWPOS_CENTERED,
-                              400, 180,
+                              window_width, window_height,
                               SDL_WINDOW_SHOWN);
 
     if(window != NULL)
@@ -68,15 +74,21 @@ void Rayc::OnEvent(SDL_Event *event)
 
 void Rayc::OnLoop()
 {
+    x = (x + 2) % 300;
+    y = (y + 2) % 300;
 
+    SDL_Delay(50);
 }
 
 void Rayc::OnRender()
 {
+
+    
+    
     SDL_SetRenderDrawColor(renderer, 200, 200, 200, 200);
     SDL_RenderClear(renderer);
 
-    SDL_Rect fillRect = {100, 100, 300, 200};
+    SDL_Rect fillRect = {100, 100, x, y};
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderFillRect(renderer, &fillRect);
 
