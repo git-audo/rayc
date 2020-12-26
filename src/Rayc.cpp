@@ -7,8 +7,13 @@ Rayc::Rayc()
     window = NULL;
     renderer = NULL;
 
+    frame_count = 0;
+    
     window_width = 800;
     window_height = 500;
+
+    num_rows = 8;
+    num_columns = 10;
     
     x = 100;
     y = 100;
@@ -49,14 +54,29 @@ int Rayc::OnExecute()
         return -1;
     }
 
+    frame_last = SDL_GetTicks();
+    
     while(isRunning)
     {
+
+        frame_count++;
+
         while(SDL_PollEvent(&event) != 0)
         {
             OnEvent(&event);
         }
 
         OnLoop();
+
+        frame_end = SDL_GetTicks();
+        if(frame_end - frame_last >= 1000)
+        {
+            std::string title{"FPS: " + std::to_string(frame_count)};
+            SDL_SetWindowTitle(window, title.c_str());
+            frame_last = frame_end;            
+            frame_count = 0;
+        }
+        
         OnRender();
     }
 
@@ -77,14 +97,11 @@ void Rayc::OnLoop()
     x = (x + 2) % 300;
     y = (y + 2) % 300;
 
-    SDL_Delay(50);
+
 }
 
 void Rayc::OnRender()
 {
-
-    
-    
     SDL_SetRenderDrawColor(renderer, 200, 200, 200, 200);
     SDL_RenderClear(renderer);
 
@@ -92,6 +109,18 @@ void Rayc::OnRender()
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderFillRect(renderer, &fillRect);
 
+    float block_size = window_height / num_rows;
+    float pos = 0;
+    for(int i=0; i<num_rows; i++)
+    {
+        pos += block_size;
+        SDL_RenderDrawLine(renderer,
+                           0, static_cast<int>(round(pos)),
+                           static_cast<int>(round(window_width)),
+                           static_cast<int>(round(pos)));
+    }
+
+    
     SDL_RenderPresent(renderer);
 }
 

@@ -20,7 +20,12 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
 
-    int window_width, window_height;
+    int frame_count;
+    Uint32 frame_last;
+    Uint32 frame_end;
+
+    size_t window_width, window_height;
+    int num_rows, num_columns;
     int x, y;
 };
 
