@@ -4,3 +4,14 @@ uint32_t pack_rgb(const uint8_t r, const uint8_t g, const uint8_t b)
 {
     return (255<<24) + (b<<16) + (g<<8) + r;
 }
+
+void draw_rect(uint32_t* pixels, const size_t win_width, const size_t win_height, const size_t x, const size_t y, const size_t w, const size_t h)
+{
+    for(size_t i=y; i<w+y; i++)
+    {
+        for(size_t j=x; j<h+x; j++)
+        {
+            pixels[i+j*win_width] = pack_rgb(200, 100, 0);
+        }
+    }
+}

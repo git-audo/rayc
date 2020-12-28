@@ -9,14 +9,17 @@ Rayc::Rayc()
 
     frame_count = 0;
     
-    window_width = 800;
-    window_height = 500;
+    window_width = 600;
+    window_height = 600;
 
     num_rows = 8;
     num_columns = 10;
     
     x = 100;
     y = 100;
+
+    map_width = 10;
+    map_height = 10;
 }
 
 bool Rayc::OnInit()
@@ -127,12 +130,23 @@ void Rayc::OnRender()
                                                  window_width, window_height);
 
     uint32_t* pixels = new uint32_t[window_width*window_height];
-    uint32_t pixel = pack_rgb(255, 0, 100);
     for(size_t i=0; i<window_height; i++)
     {
         for(size_t j=0; j<window_width; j++)
         {
-            pixels[j+i*window_width] = pixel;
+            pixels[j+i*window_width] = pack_rgb(100, 255, 0);
+        }
+    }
+
+    const size_t wall_w = window_width/map_width;
+    const size_t wall_h = window_height/map_height;
+    for(size_t i=0; i<map_height; i++)
+    {
+        for(size_t j=0; j<map_width; j++)
+        {
+            if(map[j+i*map_width] == '0'){
+                draw_rect(pixels, window_width, window_height, i*wall_h, j*wall_w, wall_w, wall_h);
+            }
         }
     }
 

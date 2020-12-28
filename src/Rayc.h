@@ -28,6 +28,19 @@ private:
     size_t window_width, window_height;
     int num_rows, num_columns;
     int x, y;
+
+    size_t map_width;
+    size_t map_height;
+    char map[101] = "0000000000"\
+                   "0        0"\
+                   "0        0"\
+                   "0     0000"\
+                   "0        0"\
+                   "0  0     0"\
+                   "0  0     0"\
+                   "0  000   0"\
+                   "0        0"\
+                   "0000000000";
 };
 
 #endif
