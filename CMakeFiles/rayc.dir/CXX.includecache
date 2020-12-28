@@ -15,8 +15,18 @@ Rayc.h
 /home/gabriele/projects/cpp/rayc/src/Rayc.h
 SDL2/SDL.h
 -
+utils.h
+/home/gabriele/projects/cpp/rayc/src/utils.h
 
 /home/gabriele/projects/cpp/rayc/src/main.cpp
 Rayc.h
 /home/gabriele/projects/cpp/rayc/src/Rayc.h
+
+/home/gabriele/projects/cpp/rayc/src/utils.cpp
+utils.h
+/home/gabriele/projects/cpp/rayc/src/utils.h
+
+/home/gabriele/projects/cpp/rayc/src/utils.h
+cstdint
+-
 

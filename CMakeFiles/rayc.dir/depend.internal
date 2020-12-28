@@ -4,6 +4,11 @@
 CMakeFiles/rayc.dir/src/Rayc.cpp.o
  /home/gabriele/projects/cpp/rayc/src/Rayc.cpp
  /home/gabriele/projects/cpp/rayc/src/Rayc.h
+ /home/gabriele/projects/cpp/rayc/src/utils.h
 CMakeFiles/rayc.dir/src/main.cpp.o
  /home/gabriele/projects/cpp/rayc/src/Rayc.h
  /home/gabriele/projects/cpp/rayc/src/main.cpp
+ /home/gabriele/projects/cpp/rayc/src/utils.h
+CMakeFiles/rayc.dir/src/utils.cpp.o
+ /home/gabriele/projects/cpp/rayc/src/utils.cpp
+ /home/gabriele/projects/cpp/rayc/src/utils.h

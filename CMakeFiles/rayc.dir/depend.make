@@ -3,7 +3,12 @@
 
 CMakeFiles/rayc.dir/src/Rayc.cpp.o: src/Rayc.cpp
 CMakeFiles/rayc.dir/src/Rayc.cpp.o: src/Rayc.h
+CMakeFiles/rayc.dir/src/Rayc.cpp.o: src/utils.h
 
 CMakeFiles/rayc.dir/src/main.cpp.o: src/Rayc.h
 CMakeFiles/rayc.dir/src/main.cpp.o: src/main.cpp
+CMakeFiles/rayc.dir/src/main.cpp.o: src/utils.h
+
+CMakeFiles/rayc.dir/src/utils.cpp.o: src/utils.cpp
+CMakeFiles/rayc.dir/src/utils.cpp.o: src/utils.h
 

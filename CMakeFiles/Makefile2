@@ -93,12 +93,12 @@ clean: CMakeFiles/rayc.dir/clean
 CMakeFiles/rayc.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gabriele/projects/cpp/rayc/CMakeFiles --progress-num=1,2,3 "Built target rayc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/gabriele/projects/cpp/rayc/CMakeFiles --progress-num=1,2,3,4 "Built target rayc"
 .PHONY : CMakeFiles/rayc.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rayc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gabriele/projects/cpp/rayc/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gabriele/projects/cpp/rayc/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rayc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/gabriele/projects/cpp/rayc/CMakeFiles 0
 .PHONY : CMakeFiles/rayc.dir/rule

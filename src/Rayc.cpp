@@ -58,7 +58,6 @@ int Rayc::OnExecute()
     
     while(isRunning)
     {
-
         frame_count++;
 
         while(SDL_PollEvent(&event) != 0)
@@ -94,14 +93,15 @@ void Rayc::OnEvent(SDL_Event *event)
 
 void Rayc::OnLoop()
 {
-    x = (x + 2) % 300;
-    y = (y + 2) % 300;
+    x = (x + 1) % 300;
+    y = (y + 1) % 300;
 
 
 }
 
 void Rayc::OnRender()
 {
+    /*
     SDL_SetRenderDrawColor(renderer, 200, 200, 200, 200);
     SDL_RenderClear(renderer);
 
@@ -119,9 +119,30 @@ void Rayc::OnRender()
                            static_cast<int>(round(window_width)),
                            static_cast<int>(round(pos)));
     }
+    */
 
+    SDL_Texture* framebuffer = SDL_CreateTexture(renderer,
+                                                 SDL_PIXELFORMAT_ARGB8888,
+                                                 SDL_TEXTUREACCESS_STREAMING,
+                                                 window_width, window_height);
+
+    uint32_t* pixels = new uint32_t[window_width*window_height];
+    uint32_t pixel = pack_rgb(255, 0, 100);
+    for(size_t i=0; i<window_height; i++)
+    {
+        for(size_t j=0; j<window_width; j++)
+        {
+            pixels[j+i*window_width] = pixel;
+        }
+    }
+
+    SDL_UpdateTexture(framebuffer, NULL, pixels, window_width*sizeof(uint32_t));
     
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, framebuffer , NULL, NULL);
     SDL_RenderPresent(renderer);
+
+    SDL_Delay(1000);
 }
 
 void Rayc::OnExit()

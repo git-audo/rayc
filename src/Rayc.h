@@ -2,6 +2,7 @@
 #define RAYC_H
 
 #include <SDL2/SDL.h>
+#include "utils.h"
 
 class Rayc
 {
