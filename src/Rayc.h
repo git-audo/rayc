@@ -41,6 +41,9 @@ private:
                    "0  000   0"\
                    "0        0"\
                    "0000000000";
+
+    float camera_x;
+    float camera_y;
 };
 
 #endif

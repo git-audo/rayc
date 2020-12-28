@@ -20,6 +20,9 @@ Rayc::Rayc()
 
     map_width = 10;
     map_height = 10;
+
+    camera_x = 100;
+    camera_y = 100;
 }
 
 bool Rayc::OnInit()
@@ -150,6 +153,8 @@ void Rayc::OnRender()
         }
     }
 
+    draw_circle(pixels, window_width, window_height, camera_x, camera_y, 10);
+    
     SDL_UpdateTexture(framebuffer, NULL, pixels, window_width*sizeof(uint32_t));
     
     SDL_RenderClear(renderer);
