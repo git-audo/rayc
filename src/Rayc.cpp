@@ -11,18 +11,17 @@ Rayc::Rayc()
     
     window_width = 600;
     window_height = 600;
-
-    num_rows = 8;
-    num_columns = 10;
     
-    x = 100;
-    y = 100;
-
     map_width = 10;
     map_height = 10;
+    wall_w = window_width/map_width;
+    wall_h = window_height/map_height;
 
     camera_x = 100;
     camera_y = 100;
+    camera_direction = 8.00;
+
+    framebuffer = new uint32_t[window_width*window_height];    
 }
 
 bool Rayc::OnInit()
@@ -99,69 +98,56 @@ void Rayc::OnEvent(SDL_Event *event)
 
 void Rayc::OnLoop()
 {
-    x = (x + 1) % 300;
-    y = (y + 1) % 300;
-
-
+    camera_direction -= 0.01;
+    if(camera_direction < 6.0)
+        camera_direction = 8.00;
 }
 
 void Rayc::OnRender()
 {
-    /*
-    SDL_SetRenderDrawColor(renderer, 200, 200, 200, 200);
-    SDL_RenderClear(renderer);
-
-    SDL_Rect fillRect = {100, 100, x, y};
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-    SDL_RenderFillRect(renderer, &fillRect);
-
-    float block_size = window_height / num_rows;
-    float pos = 0;
-    for(int i=0; i<num_rows; i++)
-    {
-        pos += block_size;
-        SDL_RenderDrawLine(renderer,
-                           0, static_cast<int>(round(pos)),
-                           static_cast<int>(round(window_width)),
-                           static_cast<int>(round(pos)));
-    }
-    */
-
-    SDL_Texture* framebuffer = SDL_CreateTexture(renderer,
+    SDL_Texture* texture = SDL_CreateTexture(renderer,
                                                  SDL_PIXELFORMAT_ARGB8888,
                                                  SDL_TEXTUREACCESS_STREAMING,
                                                  window_width, window_height);
 
-    uint32_t* pixels = new uint32_t[window_width*window_height];
+
     for(size_t i=0; i<window_height; i++)
     {
         for(size_t j=0; j<window_width; j++)
         {
-            pixels[j+i*window_width] = pack_rgb(100, 255, 0);
+            framebuffer[j+i*window_width] = pack_rgb(41, 6, 40);
         }
     }
 
-    const size_t wall_w = window_width/map_width;
-    const size_t wall_h = window_height/map_height;
     for(size_t i=0; i<map_height; i++)
     {
         for(size_t j=0; j<map_width; j++)
         {
             if(map[j+i*map_width] == '0'){
-                draw_rect(pixels, window_width, window_height, i*wall_h, j*wall_w, wall_w, wall_h);
+                draw_rect(framebuffer, window_width, window_height, i*wall_h, j*wall_w, wall_w, wall_h);
             }
         }
     }
 
-    draw_circle(pixels, window_width, window_height, camera_x, camera_y, 10);
+    draw_circle(framebuffer, window_width, window_height, camera_x, camera_y, 10);
+
+    // cast a ray in the camera direction
+    for(float i=0; i<500; i+=5)
+    {
+        float x_pos = camera_x + i*cos(camera_direction);
+        float y_pos = camera_y + i*sin(camera_direction);
+        if(map[int(x_pos/wall_w)+int(y_pos/wall_h)*map_width] == '0')
+            break;
+        framebuffer[int(x_pos)+int(y_pos)*window_width] = pack_rgb(255, 255, 255);
+    }
     
-    SDL_UpdateTexture(framebuffer, NULL, pixels, window_width*sizeof(uint32_t));
+    SDL_UpdateTexture(texture, NULL, framebuffer, window_width*sizeof(uint32_t));
     
     SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer, framebuffer , NULL, NULL);
+    SDL_RenderCopy(renderer, texture , NULL, NULL);
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(1000);
+    SDL_Delay(50);
 }
 
 void Rayc::OnExit()

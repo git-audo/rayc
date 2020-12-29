@@ -11,7 +11,7 @@ void draw_rect(uint32_t* pixels, const size_t win_width, const size_t win_height
     {
         for(size_t j=x; j<h+x; j++)
         {
-            pixels[i+j*win_width] = pack_rgb(200, 100, 0);
+            pixels[i+j*win_width] = pack_rgb(233, 196, 106);
         }
     }
 }
@@ -23,7 +23,7 @@ void draw_circle(uint32_t* pixels, const size_t win_width, const size_t win_heig
         for(size_t j=x-radius; j<x+radius; j++)
         {
             if(((j-x)*(j-x)+(i-y)*(i-y)) < radius*radius)
-                pixels[i+j*win_width] = pack_rgb(200, 100, 0);
+                pixels[i+j*win_width] = pack_rgb(100, 196, 106);
         }
     }
    

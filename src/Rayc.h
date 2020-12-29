@@ -26,24 +26,28 @@ private:
     Uint32 frame_end;
 
     size_t window_width, window_height;
-    int num_rows, num_columns;
-    int x, y;
 
     size_t map_width;
     size_t map_height;
     char map[101] = "0000000000"\
-                   "0        0"\
-                   "0        0"\
-                   "0     0000"\
-                   "0        0"\
-                   "0  0     0"\
-                   "0  0     0"\
-                   "0  000   0"\
-                   "0        0"\
-                   "0000000000";
+                    "0        0"\
+                    "0        0"\
+                    "0     0000"\
+                    "0        0"\
+                    "0  0     0"\
+                    "0  0     0"\
+                    "0  000   0"\
+                    "0        0"\
+                    "0000000000";
 
+    size_t wall_w;
+    size_t wall_h;
+  
     float camera_x;
     float camera_y;
+    float camera_direction;
+
+    uint32_t* framebuffer;
 };
 
 #endif
