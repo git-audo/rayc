@@ -46,6 +46,7 @@ private:
     float camera_x;
     float camera_y;
     float camera_direction;
+    float camera_fov;
 
     uint32_t* framebuffer;
 };
