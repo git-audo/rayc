@@ -20,7 +20,8 @@ private:
     bool isRunning;
     SDL_Window *window;
     SDL_Renderer *renderer;
-
+    SDL_Texture* texture;
+  
     int frame_count;
     Uint32 frame_last;
     Uint32 frame_end;
@@ -30,15 +31,15 @@ private:
     size_t map_width;
     size_t map_height;
     char map[101] = "0000000000"\
-                    "0        0"\
-                    "0        0"\
+                    "0        1"\
+                    "0        1"\
                     "0     0000"\
                     "0        0"\
                     "0  0     0"\
                     "0  0     0"\
                     "0  000   0"\
                     "0        0"\
-                    "0000000000";
+                    "1111111111";
 
     size_t wall_w;
     size_t wall_h;

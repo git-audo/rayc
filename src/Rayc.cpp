@@ -48,6 +48,11 @@ bool Rayc::OnInit()
         return false;
     }
 
+    texture = SDL_CreateTexture(renderer,
+                                SDL_PIXELFORMAT_ARGB8888,
+                                SDL_TEXTUREACCESS_STREAMING,
+                                window_width, window_height);
+
     return true;
 }
 
@@ -95,23 +100,37 @@ void Rayc::OnEvent(SDL_Event *event)
     {
         isRunning = false;
     }
+    else if(event->type == SDL_KEYDOWN)
+    {
+        switch(event->key.keysym.sym)
+        {
+        case SDLK_w:
+            camera_y += 2;
+            break;
+        case SDLK_a:
+            camera_x += 2;
+            break;
+        case SDLK_s:
+            camera_y -= 2;
+            break;
+        case SDLK_d:
+            camera_x -= 2;
+            break;
+        }
+
+    }
+    else if(event->type == SDL_MOUSEMOTION)
+    {
+        camera_direction += event->motion.xrel * 0.005;
+    }
 }
 
 void Rayc::OnLoop()
 {
-    
-    camera_direction -= 0.01;
-    if(camera_direction < 5.0)
-        camera_direction = 8.00;
 }
 
 void Rayc::OnRender()
 {
-    SDL_Texture* texture = SDL_CreateTexture(renderer,
-                                             SDL_PIXELFORMAT_ARGB8888,
-                                             SDL_TEXTUREACCESS_STREAMING,
-                                             window_width, window_height);
-
     for(size_t i=0; i<window_height; i++)
     {
         for(size_t j=0; j<window_width; j++)
@@ -126,6 +145,8 @@ void Rayc::OnRender()
         {
             if(map[j+i*map_width] == '0'){
                 draw_rect(framebuffer, window_width, window_height, j*wall_w, i*wall_h, wall_w, wall_h);
+            } else if(map[j+i*map_width] == '1'){
+                draw_rect(framebuffer, window_width, window_height, j*wall_w, i*wall_h, wall_w, wall_h, pack_rgb(255, 255, 255));
             }
         }
     }
@@ -135,18 +156,19 @@ void Rayc::OnRender()
     // cast a ray in the camera looking direction
     for(float v=camera_direction; v<camera_direction+camera_fov; v+=0.002)
     {
-        for(float i=0; i<700; i+=5)
+        for(float i=0; i<600; i+=5)
         {
             float x_pos = camera_x + i*cos(v);
             float y_pos = camera_y + i*sin(v);
-            if(map[int(x_pos/wall_w)+int(y_pos/wall_h)*map_width] == '0')
+            if(map[int(x_pos/wall_w)+int(y_pos/wall_h)*map_width] != ' ')
             {
                 size_t height = window_height/(i*0.02);
                 draw_rect(framebuffer, window_width, window_height,
-                          window_width/2+(v-camera_direction)*(500), window_height/2-height/2, 1, height);
+                          window_width/2+(v-camera_direction)*(500),
+                          window_height/2-height/2, 1, height, pack_rgb((height/(window_height/1.5))*255, 60, 0));
                 break;
             }
-            framebuffer[int(x_pos)+int(y_pos)*window_width] = pack_rgb(255, 255, 255);
+            framebuffer[int(x_pos)+int(y_pos)*(window_width)] = pack_rgb(255, 255, 255);
         }
     }
     
@@ -156,7 +178,7 @@ void Rayc::OnRender()
     SDL_RenderCopy(renderer, texture , NULL, NULL);
     SDL_RenderPresent(renderer);
 
-    SDL_Delay(50);
+    SDL_Delay(10);
 }
 
 void Rayc::OnExit()
