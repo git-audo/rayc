@@ -156,7 +156,7 @@ void Rayc::OnRender()
     // cast a ray in the camera looking direction
     for(float v=camera_direction; v<camera_direction+camera_fov; v+=0.002)
     {
-        for(float i=0; i<600; i+=5)
+        for(float i=0; i<600; i+=0.5)
         {
             float x_pos = camera_x + i*cos(v);
             float y_pos = camera_y + i*sin(v);
