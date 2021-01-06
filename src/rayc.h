@@ -4,8 +4,7 @@
 #include <SDL2/SDL.h>
 #include "utils.h"
 
-class Rayc
-{
+class Rayc {
 public:
     Rayc();
 

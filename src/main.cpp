@@ -1,7 +1,6 @@
-#include "Rayc.h"
+#include "rayc.h"
 
-int main()
-{
+int main() {
     Rayc application;
     return application.OnExecute();
 }

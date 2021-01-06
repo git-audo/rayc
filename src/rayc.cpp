@@ -1,8 +1,7 @@
 #include <iostream>
-#include "Rayc.h"
+#include "rayc.h"
 
-Rayc::Rayc()
-{
+Rayc::Rayc() {
     isRunning = true;
     window = NULL;
     renderer = NULL;
@@ -25,10 +24,8 @@ Rayc::Rayc()
     framebuffer = new uint32_t[window_width*window_height];    
 }
 
-bool Rayc::OnInit()
-{
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
-    {
+bool Rayc::OnInit() {
+    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return false;
     }
 
@@ -38,12 +35,9 @@ bool Rayc::OnInit()
                               window_width, window_height,
                               SDL_WINDOW_SHOWN);
 
-    if(window != NULL)
-    {
+    if(window != NULL) {
         renderer = SDL_CreateRenderer(window, -1, 0);
-    }
-    else
-    {
+    } else {
         std::cout << "Failed to create window" << std::endl;
         return false;
     }
@@ -56,31 +50,26 @@ bool Rayc::OnInit()
     return true;
 }
 
-int Rayc::OnExecute()
-{
+int Rayc::OnExecute() {
     SDL_Event event;
 
-    if(OnInit() == false)
-    {
+    if(OnInit() == false) {
         return -1;
     }
 
     frame_last = SDL_GetTicks();
     
-    while(isRunning)
-    {
+    while(isRunning) {
         frame_count++;
 
-        while(SDL_PollEvent(&event) != 0)
-        {
+        while(SDL_PollEvent(&event) != 0) {
             OnEvent(&event);
         }
 
         OnLoop();
 
         frame_end = SDL_GetTicks();
-        if(frame_end - frame_last >= 1000)
-        {
+        if(frame_end - frame_last >= 1000) {
             std::string title{"FPS: " + std::to_string(frame_count)};
             SDL_SetWindowTitle(window, title.c_str());
             frame_last = frame_end;            
@@ -94,16 +83,11 @@ int Rayc::OnExecute()
     return 0;
 }
 
-void Rayc::OnEvent(SDL_Event *event)
-{
-    if(event->type == SDL_QUIT)
-    {
+void Rayc::OnEvent(SDL_Event *event) {
+    if(event->type == SDL_QUIT) {
         isRunning = false;
-    }
-    else if(event->type == SDL_KEYDOWN)
-    {
-        switch(event->key.keysym.sym)
-        {
+    } else if(event->type == SDL_KEYDOWN) {
+        switch(event->key.keysym.sym) {
         case SDLK_w:
             camera_x += 3*cos(camera_direction);
             camera_y += 3*sin(camera_direction);
@@ -119,35 +103,28 @@ void Rayc::OnEvent(SDL_Event *event)
             camera_x -= 2;
             break;
         }
-    }
-    else if(event->type == SDL_MOUSEMOTION)
-    {
+    } else if(event->type == SDL_MOUSEMOTION) {
         camera_direction += event->motion.xrel * 0.01;
     }
 }
 
-void Rayc::OnLoop()
-{
-}
+void Rayc::OnLoop() {}
 
-void Rayc::OnRender()
-{
-    for(size_t i=0; i<window_height; i++)
-    {
-        for(size_t j=0; j<window_width; j++)
-        {
+void Rayc::OnRender() {
+    for(size_t i=0; i<window_height; i++) {
+        for(size_t j=0; j<window_width; j++) {
             framebuffer[j+i*window_width] = pack_rgb(41, 6, 40);
         }
     }
 
-    for(size_t i=0; i<map_height; i++)
-    {
-        for(size_t j=0; j<map_width; j++)
-        {
-            if(map[j+i*map_width] == '0'){
-                draw_rect(framebuffer, window_width, window_height, j*wall_w, i*wall_h, wall_w, wall_h);
-            } else if(map[j+i*map_width] == '1'){
-                draw_rect(framebuffer, window_width, window_height, j*wall_w, i*wall_h, wall_w, wall_h, pack_rgb(255, 255, 255));
+    for(size_t i=0; i<map_height; i++) {
+        for(size_t j=0; j<map_width; j++) {
+            if(map[j+i*map_width] == '0') {
+                draw_rect(framebuffer, window_width, window_height,
+                          j*wall_w, i*wall_h, wall_w, wall_h);
+            } else if(map[j+i*map_width] == '1') {
+                draw_rect(framebuffer, window_width, window_height,
+                          j*wall_w, i*wall_h, wall_w, wall_h, pack_rgb(255, 255, 255));
             }
         }
     }
@@ -155,18 +132,16 @@ void Rayc::OnRender()
     draw_circle(framebuffer, window_width, window_height, camera_x, camera_y, 10);
 
     // cast a ray in the camera looking direction
-    for(float v=camera_direction-camera_fov/2; v<camera_direction+camera_fov/2; v+=0.001)
-    {
-        for(float i=0; i<800; i+=1)
-        {
+    for(float v=camera_direction-camera_fov/2; v<camera_direction+camera_fov/2; v+=0.001) {
+        for(float i=0; i<800; i+=1) {
             float x_pos = camera_x + i*cos(v);
             float y_pos = camera_y + i*sin(v);
-            if(map[int(x_pos/wall_w)+int(y_pos/wall_h)*map_width] != ' ')
-            {
+            if(map[int(x_pos/wall_w)+int(y_pos/wall_h)*map_width] != ' ') {
                 size_t height = window_height/(i*0.02);
                 draw_rect(framebuffer, window_width, window_height,
                           window_width/2+(v-camera_direction+camera_fov/2)*(750),
-                          window_height/2-height/2, 1.5, height, pack_rgb((height/(window_height/1.5))*255, 60, 0));
+                          window_height/2-height/2, 1.5, height,
+                          pack_rgb((height/(window_height/1.5))*255, 60, 0));
                 break;
             }
             //framebuffer[int(x_pos)+int(y_pos)*(window_width)] = pack_rgb(255, 255, 255);
@@ -186,8 +161,7 @@ void Rayc::OnRender()
     SDL_Delay(10);
 }
 
-void Rayc::OnExit()
-{
+void Rayc::OnExit() {
     SDL_DestroyWindow(window);
     window = NULL;
     SDL_Quit();

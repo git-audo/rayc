@@ -142,33 +142,6 @@ rayc/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/build
 .PHONY : rayc/fast
 
-src/Rayc.o: src/Rayc.cpp.o
-
-.PHONY : src/Rayc.o
-
-# target to build an object file
-src/Rayc.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.o
-.PHONY : src/Rayc.cpp.o
-
-src/Rayc.i: src/Rayc.cpp.i
-
-.PHONY : src/Rayc.i
-
-# target to preprocess a source file
-src/Rayc.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.i
-.PHONY : src/Rayc.cpp.i
-
-src/Rayc.s: src/Rayc.cpp.s
-
-.PHONY : src/Rayc.s
-
-# target to generate assembly for a file
-src/Rayc.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/Rayc.cpp.s
-.PHONY : src/Rayc.cpp.s
-
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -195,6 +168,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/rayc.o: src/rayc.cpp.o
+
+.PHONY : src/rayc.o
+
+# target to build an object file
+src/rayc.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/rayc.cpp.o
+.PHONY : src/rayc.cpp.o
+
+src/rayc.i: src/rayc.cpp.i
+
+.PHONY : src/rayc.i
+
+# target to preprocess a source file
+src/rayc.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/rayc.cpp.i
+.PHONY : src/rayc.cpp.i
+
+src/rayc.s: src/rayc.cpp.s
+
+.PHONY : src/rayc.s
+
+# target to generate assembly for a file
+src/rayc.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rayc.dir/build.make CMakeFiles/rayc.dir/src/rayc.cpp.s
+.PHONY : src/rayc.cpp.s
 
 src/utils.o: src/utils.cpp.o
 
@@ -232,12 +232,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... rayc"
-	@echo "... src/Rayc.o"
-	@echo "... src/Rayc.i"
-	@echo "... src/Rayc.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/rayc.o"
+	@echo "... src/rayc.i"
+	@echo "... src/rayc.s"
 	@echo "... src/utils.o"
 	@echo "... src/utils.i"
 	@echo "... src/utils.s"

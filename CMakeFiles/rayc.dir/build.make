@@ -89,18 +89,18 @@ CMakeFiles/rayc.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rayc.dir/src/main.cpp.s"
 	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriele/projects/cpp/rayc/src/main.cpp -o CMakeFiles/rayc.dir/src/main.cpp.s
 
-CMakeFiles/rayc.dir/src/Rayc.cpp.o: CMakeFiles/rayc.dir/flags.make
-CMakeFiles/rayc.dir/src/Rayc.cpp.o: src/Rayc.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gabriele/projects/cpp/rayc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rayc.dir/src/Rayc.cpp.o"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rayc.dir/src/Rayc.cpp.o -c /home/gabriele/projects/cpp/rayc/src/Rayc.cpp
+CMakeFiles/rayc.dir/src/rayc.cpp.o: CMakeFiles/rayc.dir/flags.make
+CMakeFiles/rayc.dir/src/rayc.cpp.o: src/rayc.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/gabriele/projects/cpp/rayc/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/rayc.dir/src/rayc.cpp.o"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rayc.dir/src/rayc.cpp.o -c /home/gabriele/projects/cpp/rayc/src/rayc.cpp
 
-CMakeFiles/rayc.dir/src/Rayc.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rayc.dir/src/Rayc.cpp.i"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gabriele/projects/cpp/rayc/src/Rayc.cpp > CMakeFiles/rayc.dir/src/Rayc.cpp.i
+CMakeFiles/rayc.dir/src/rayc.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rayc.dir/src/rayc.cpp.i"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/gabriele/projects/cpp/rayc/src/rayc.cpp > CMakeFiles/rayc.dir/src/rayc.cpp.i
 
-CMakeFiles/rayc.dir/src/Rayc.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rayc.dir/src/Rayc.cpp.s"
-	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriele/projects/cpp/rayc/src/Rayc.cpp -o CMakeFiles/rayc.dir/src/Rayc.cpp.s
+CMakeFiles/rayc.dir/src/rayc.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rayc.dir/src/rayc.cpp.s"
+	/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/gabriele/projects/cpp/rayc/src/rayc.cpp -o CMakeFiles/rayc.dir/src/rayc.cpp.s
 
 CMakeFiles/rayc.dir/src/utils.cpp.o: CMakeFiles/rayc.dir/flags.make
 CMakeFiles/rayc.dir/src/utils.cpp.o: src/utils.cpp
@@ -118,14 +118,14 @@ CMakeFiles/rayc.dir/src/utils.cpp.s: cmake_force
 # Object files for target rayc
 rayc_OBJECTS = \
 "CMakeFiles/rayc.dir/src/main.cpp.o" \
-"CMakeFiles/rayc.dir/src/Rayc.cpp.o" \
+"CMakeFiles/rayc.dir/src/rayc.cpp.o" \
 "CMakeFiles/rayc.dir/src/utils.cpp.o"
 
 # External object files for target rayc
 rayc_EXTERNAL_OBJECTS =
 
 rayc: CMakeFiles/rayc.dir/src/main.cpp.o
-rayc: CMakeFiles/rayc.dir/src/Rayc.cpp.o
+rayc: CMakeFiles/rayc.dir/src/rayc.cpp.o
 rayc: CMakeFiles/rayc.dir/src/utils.cpp.o
 rayc: CMakeFiles/rayc.dir/build.make
 rayc: CMakeFiles/rayc.dir/link.txt
