@@ -6,7 +6,7 @@ Rayc::Rayc() {
     renderer = NULL;
     window = NULL;
     
-    window_width      = 1536;
+    window_width      = 1236;
     window_height     = 768;
     camera_direction  = 1.00;
     camera_fov        = 1.00;
@@ -94,24 +94,26 @@ void Rayc::OnEvent(SDL_Event *event) {
     } else if(event->type == SDL_KEYDOWN) {
         switch(event->key.keysym.sym) {
         case SDLK_w:
-            camera_x += 3*cos(camera_direction);
-            camera_y += 3*sin(camera_direction);
+            camera_x += 2*cos(camera_direction);
+            camera_y += 2*sin(camera_direction);
             break;
         case SDLK_a:
-            camera_x += 2;
+            camera_direction -= 0.01;
             break;
         case SDLK_s:
             camera_x -= 3*cos(camera_direction);
             camera_y -= 3*sin(camera_direction);
             break;
         case SDLK_d:
-            camera_x -= 2;
+            camera_direction += 0.01;	    
             break;
 	case SDLK_m:
 	    show_map = !show_map;
+	    show_field_of_view = false;
 	    break;
         case SDLK_v:
-            show_field_of_view = !show_field_of_view;
+	    if(show_map)
+		show_field_of_view = !show_field_of_view;
             break;            
         }
     } else if(event->type == SDL_MOUSEMOTION) {
@@ -141,23 +143,17 @@ void Rayc::OnLoop() {
                           (v-camera_direction+camera_fov/2)*(window_width),
                           window_height/2 - height/2, band_width, height,
                           pack_rgb(depth_color_intensity*255, 33, 90));
-		
-                // draw_rect(frame_buffer, window_width, window_height,
-                //           window_width/2 + (v-camera_direction+camera_fov/2)*(750),
-                //           window_height/2 - height/2, int(1.5), height,
-                //           pack_rgb(depth_color_intensity*255, 33, 90));
-		
                 break;
             }
 
 	    if(show_field_of_view)
-		frame_buffer[int(x_pos)+int(y_pos)*(window_width)] = pack_rgb(130, 196, 255);
+		frame_buffer[int(x_pos/3)+int(y_pos/3)*(window_width)] = pack_rgb(130, 196, 255);
         }
     }
 
     if(show_map) {
 	map.draw(frame_buffer, window_width, window_height);    
-	draw_circle(frame_buffer, window_width, window_height, camera_x, camera_y, 10);
+	draw_circle(frame_buffer, window_width, window_height, camera_x/3, camera_y/3, 4);
     }
 }
 

@@ -19,7 +19,7 @@ bool Map::load(size_t window_width, size_t window_height) {
 	cursor += sizeof(char) * m_map_width;
     }
     
-    m_wall_w = window_width / (m_map_width*2);
+    m_wall_w = window_height / m_map_width;
     m_wall_h = window_height / m_map_height;	
 
     return true;
@@ -30,10 +30,7 @@ void Map::draw(uint32_t* frame_buffer, size_t window_width, size_t window_height
         for(size_t j=0; j<m_map_width; j++) {
             if(map[j+i*m_map_width] == '0') {
                 draw_rect(frame_buffer, window_width, window_height,
-			  j*m_wall_w, i*m_wall_h, m_wall_w, m_wall_h);
-            } else if(map[j+i*m_map_width] == '1') {
-                draw_rect(frame_buffer, window_width, window_height,
-			  j*m_wall_w, i*m_wall_h, m_wall_w, m_wall_h, pack_rgb(168, 211, 178));
+			  j*m_wall_w/3, i*m_wall_h/3, m_wall_w/3, m_wall_h/3);
             }
         }
     }
