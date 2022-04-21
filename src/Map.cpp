@@ -1,10 +1,29 @@
 #include "map.h"
 
-Map::Map(size_t map_width, size_t map_height, size_t window_width, size_t window_height)
-    : m_map_width(map_width), m_map_height(map_height) {
-    m_wall_w = window_width / (2*m_map_width);
+Map::Map() {};
+
+bool Map::load(size_t window_width, size_t window_height) {
+    std::ifstream map_file("data/map.txt");
+    if (!map_file.is_open())
+	return false;
+
+    map_file >> m_map_width >> m_map_height;
+    
+    uint32_t map_size = m_map_width*m_map_height;
+    map = (char *) malloc(sizeof(char) * map_size);
+
+    char *cursor = map;        
+    map_file.getline(cursor, map_size);
+    
+    while(map_file.getline(cursor, map_size)) {
+	cursor += sizeof(char) * m_map_width;
+    }
+    
+    m_wall_w = window_width / (m_map_width*2);
     m_wall_h = window_height / m_map_height;	
-};
+
+    return true;
+}
 
 void Map::draw(uint32_t* frame_buffer, size_t window_width, size_t window_height) {
     for(size_t i=0; i<m_map_height; i++) {

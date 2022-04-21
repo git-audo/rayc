@@ -6,20 +6,30 @@ Rayc::Rayc() {
     renderer = NULL;
     window = NULL;
     
-    window_width = 1536;
-    window_height = 768;
-    camera_direction = 1.00;
-    camera_fov = 1.00;
-    camera_x = 200;
-    camera_y = 200;
-    frame_count = 0;
-        
+    window_width      = 1536;
+    window_height     = 768;
+    camera_direction  = 1.00;
+    camera_fov        = 1.00;
+    camera_x          = 200;
+    camera_y          = 200;
+    draw_distance     = 800;
+    mouse_sensitivity = 0.01;
+    frame_count       = 0;
+
+    band_width = int(window_width/600);
+
     show_field_of_view = false;
+    show_map = false;
     
     frame_buffer = new uint32_t[window_width*window_height];
 }
 
 bool Rayc::OnInit() {
+    if(!map.load(window_width, window_height)) {
+	printf("Error opening map file.\n");
+	return false;
+    }
+    
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         return false;
     }
@@ -97,52 +107,61 @@ void Rayc::OnEvent(SDL_Event *event) {
         case SDLK_d:
             camera_x -= 2;
             break;
+	case SDLK_m:
+	    show_map = !show_map;
+	    break;
         case SDLK_v:
             show_field_of_view = !show_field_of_view;
             break;            
         }
     } else if(event->type == SDL_MOUSEMOTION) {
-        camera_direction += event->motion.xrel * 0.01;
+        camera_direction += event->motion.xrel * mouse_sensitivity;
     }
 }
 
-void Rayc::OnLoop() {}
-
-void Rayc::OnRender() {
-    for(size_t i=0; i<window_height; i++) {
+void Rayc::OnLoop() {
+    // fill background
+    for(size_t i=0; i<window_height/2; i++) {
         for(size_t j=0; j<window_width; j++) {
             frame_buffer[j+i*window_width] = pack_rgb(40, 6, 41);
+            frame_buffer[j+(i+window_height/2)*window_width] = pack_rgb(31, 31, 31);	    
         }
     }
-
-    map.draw(frame_buffer, window_width, window_height);
 
     // cast a ray in the camera looking direction
     for(float v=camera_direction-camera_fov/2; v<camera_direction+camera_fov/2; v+=0.001) {
-        for(float i=0; i<800; i+=1) {
+        for(float i=0; i<draw_distance; i+=1) {
             float x_pos = camera_x + i*cos(v);
             float y_pos = camera_y + i*sin(v);
+	    
             if(map.is_tile_empty(x_pos, y_pos)) {
-                size_t height = window_height/(i*0.02);
+                size_t height = window_height/(i*0.016);
                 float depth_color_intensity = (height/(window_height/1.5));
                 draw_rect(frame_buffer, window_width, window_height,
-                          window_width/2 + (v-camera_direction+camera_fov/2)*(750),
-                          window_height/2 - height/2, int(1.5), height,
+                          (v-camera_direction+camera_fov/2)*(window_width),
+                          window_height/2 - height/2, band_width, height,
                           pack_rgb(depth_color_intensity*255, 33, 90));
+		
+                // draw_rect(frame_buffer, window_width, window_height,
+                //           window_width/2 + (v-camera_direction+camera_fov/2)*(750),
+                //           window_height/2 - height/2, int(1.5), height,
+                //           pack_rgb(depth_color_intensity*255, 33, 90));
+		
                 break;
             }
 
-	        if (show_field_of_view) frame_buffer[int(x_pos)+int(y_pos)*(window_width)] = pack_rgb(130, 196, 255);
+	    if(show_field_of_view)
+		frame_buffer[int(x_pos)+int(y_pos)*(window_width)] = pack_rgb(130, 196, 255);
         }
     }
 
-    // draw camera position indicator
-    draw_circle(frame_buffer, window_width, window_height, camera_x, camera_y, 10);
-    
-    // draw reticle
-    draw_rect(frame_buffer, window_width, window_height,
-              window_width*3/4, window_height/2-5, 1, 10);
-    
+    if(show_map) {
+	map.draw(frame_buffer, window_width, window_height);    
+	draw_circle(frame_buffer, window_width, window_height, camera_x, camera_y, 10);
+    }
+}
+
+void Rayc::OnRender() {
     SDL_UpdateTexture(texture, NULL, frame_buffer, window_width*sizeof(uint32_t));
     
     SDL_RenderClear(renderer);

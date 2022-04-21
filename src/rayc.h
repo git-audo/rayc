@@ -28,16 +28,19 @@ private:
 
     size_t window_width;
     size_t window_height;
-    
+
+    float mouse_sensitivity;
     float camera_x;
     float camera_y;
     float camera_direction;
     float camera_fov;
+    int draw_distance;
+    int band_width;
 
-    bool show_field_of_view;
+    bool show_field_of_view; 
+    bool show_map;   
 
-    Map map{ 10, 10 , 1536, 768 };
-
+    Map map;
     uint32_t *frame_buffer;
 };
 
