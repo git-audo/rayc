@@ -5,7 +5,7 @@ Map::Map() {};
 bool Map::load(size_t window_width, size_t window_height) {
     std::ifstream map_file("data/map.txt");
     if (!map_file.is_open())
-	return false;
+        return false;
 
     map_file >> m_map_width >> m_map_height;
     
@@ -16,7 +16,7 @@ bool Map::load(size_t window_width, size_t window_height) {
     map_file.getline(cursor, map_size);
     
     while(map_file.getline(cursor, map_size)) {
-	cursor += sizeof(char) * m_map_width;
+        cursor += sizeof(char) * m_map_width;
     }
     
     m_wall_w = window_height / m_map_width;
