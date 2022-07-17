@@ -3,8 +3,8 @@ SRC_DIR = src
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp)
 BUILD_DIR = build
 OBJ_NAME = render
-INCLUDE_PATHS = -Iinclude
-LIBRARY_PATHS = -L /opt/homebrew/Cellar/sdl2/2.0.20/lib
+INCLUDE_PATHS = -I /opt/homebrew/include
+LIBRARY_PATHS = -L /opt/homebrew/lib
 COMPILER_FLAGS = -std=c++11 -O0 -g
 LINKER_FLAGS = -lsdl2
 

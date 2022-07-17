@@ -2,6 +2,10 @@
 
 Map::Map() {};
 
+Map::~Map() {
+    delete map;
+};
+
 bool Map::load(size_t window_width, size_t window_height) {
     std::ifstream map_file("data/map.txt");
     if (!map_file.is_open())
@@ -10,7 +14,7 @@ bool Map::load(size_t window_width, size_t window_height) {
     map_file >> m_map_width >> m_map_height;
     
     uint32_t map_size = m_map_width*m_map_height;
-    map = (char *) malloc(sizeof(char) * map_size);
+    map = new char[sizeof(char) * map_size];
 
     char *cursor = map;        
     map_file.getline(cursor, map_size);
@@ -36,7 +40,7 @@ void Map::draw(uint32_t* frame_buffer, size_t window_width, size_t window_height
     }
 }
 
-bool Map::is_tile_empty(float camera_x_pos, float camera_y_pos) {
+bool Map::is_wall_tile(float camera_x_pos, float camera_y_pos) {
     int normalized_x_pos = int(camera_x_pos / m_wall_w);
     int normalized_y_pos = int(camera_y_pos / m_wall_h);
 	
