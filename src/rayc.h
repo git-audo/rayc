@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "utils.h"
 #include "map.h"
+#include "camera.h"
 
 class Rayc {
 public:
@@ -30,12 +31,6 @@ private:
     size_t window_width;
     size_t window_height;
 
-    float mouse_sensitivity;
-    float camera_x;
-    float camera_y;
-    float camera_direction;
-    float camera_fov;
-    int camera_speed;
     int draw_distance;
     int band_width;
 
@@ -43,6 +38,7 @@ private:
     bool show_map;
 
     Map map;
+    Camera camera;
     uint32_t *frame_buffer;
 };
 
